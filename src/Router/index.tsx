@@ -50,8 +50,18 @@ const routesConfig: RouteConfig[] = [
         children: [
           {
             path: "home",
-            meta: { name: "home", title: "用户", isSubMenu: true },
+            meta: { name: "home", title: "用户" },
             element: React.lazy(() => import("./home")),
+            middlewares: [
+              React.lazy(() => import("./RouterSubRender/RouterSubRender")),
+            ],
+            children: [
+              {
+                path: "kitchen",
+                meta: { name: "kitchen", title: "用户" },
+                element: React.lazy(() => import("./kitchen")),
+              },
+            ],
           },
         ],
         middlewares: [React.lazy(() => import("./RouterGuard/RouterGuard"))],
@@ -63,6 +73,7 @@ const routesConfig: RouteConfig[] = [
           name: "404",
           title: "404",
         },
+        middlewares: [React.lazy(() => import("./RouterGuard/RouterGuard"))],
         element: React.lazy(() => import("./404")),
       },
     ],

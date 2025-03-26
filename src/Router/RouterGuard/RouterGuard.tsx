@@ -84,7 +84,9 @@ const RouterGuard: React.FC<Props> = ({ children }) => {
             router.navigate("/login", { replace: true });
           }
         }
-        setBeforeEnterRun("successful");
+        setTimeout(() => {
+          setBeforeEnterRun("successful");
+        }, 2000);
       } catch (error) {
         console.error(error);
         setBeforeEnterRun("error");
@@ -100,14 +102,16 @@ const RouterGuard: React.FC<Props> = ({ children }) => {
 
   if (!isUsed && ["initial", "running"].includes(beforeEnterRun)) {
     return (
-      <div
-        style={{ width: "100vw", height: "100vh", backgroundColor: "green" }}
-      >
+      <div style={{ width: "100vw", height: "100vh", backgroundColor: "blue" }}>
         loading...中间件
       </div>
     );
   }
-  return <div style={{ width: "100vw", height: "100vh" }}>{children}</div>;
+  return (
+    <div style={{ width: "100vw", height: "100vh", background: "pink" }}>
+      {children}
+    </div>
+  );
 };
 
 export default RouterGuard;
